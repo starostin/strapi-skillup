@@ -1,0 +1,16 @@
+version: "3.7"
+services:
+  postgres:
+    container_name: "strapi-db"
+    environment:
+      POSTGRES_DB: "strapi_db"
+      POSTGRES_USER: "strapi_user"
+      POSTGRES_PASSWORD: "strapi_pass_1234"
+      TZ: "UTC"
+      PGTZ: "UTC"
+    image: "postgres:11.5"
+    ports:
+      - "5432:5432"
+    restart: always
+    volumes:
+      - "./.docker/postgres:/var/lib/postgresql/data"
