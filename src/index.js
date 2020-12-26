@@ -3,6 +3,8 @@ const bodyParser = require('koa-bodyparser');
 
 const indexRoutes = require('./routes')
 const movieRoutes = require('./routes/movies')
+const userRoutes = require('./routes/user')
+
 const app = new Koa()
 
 app.use(async (ctx, next) => {
@@ -19,8 +21,11 @@ app.use(async (ctx, next) => {
 });
 
 app.use(bodyParser());
+require('./middlewares/auth');
+
 app.use(indexRoutes.routes());
 app.use(movieRoutes.routes());
+app.use(userRoutes.routes());
 
 app.on('error', (err, ctx) => {
   console.log('-------------error------------', err)
